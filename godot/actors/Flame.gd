@@ -24,6 +24,7 @@ func _process(delta):
 	if Input.is_action_pressed("ui_left"):
 		rotation_dir -= 1
 	rotation += rotation_dir * rotation_speed * delta
+
 	
 func _physics_process(delta):
 	velocity = Vector2(speed, 0).rotated(rotation)

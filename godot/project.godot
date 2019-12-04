@@ -15,9 +15,8 @@ _global_script_class_icons={
 
 [application]
 
-config/name="Through the Wormpole"
-run/main_scene="res://sprites/Worm.tscn"
-config/icon="res://icon.png"
+config/name="Wildfire"
+run/main_scene="res://Main.tscn"
 
 [rendering]
 
