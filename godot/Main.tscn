@@ -11,3 +11,6 @@ position = Vector2( 1, 0 )
 [node name="Flame" parent="." instance=ExtResource( 2 )]
 position = Vector2( 134.566, 497.855 )
 z_index = 1
+
+[node name="Camera2D" type="Camera2D" parent="Flame"]
+current = true
