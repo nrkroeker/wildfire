@@ -9,8 +9,25 @@
 position = Vector2( 1, 0 )
 
 [node name="Flame" parent="." instance=ExtResource( 2 )]
-position = Vector2( 134.566, 497.855 )
+position = Vector2( 512.405, 300.625 )
 z_index = 1
 
 [node name="Camera2D" type="Camera2D" parent="Flame"]
 current = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+margin_left = 352.756
+margin_top = 530.485
+margin_right = 392.756
+margin_bottom = 541.485
+rect_scale = Vector2( 9.45001, 3.79424 )
+color = Color( 0, 0, 0, 0.313726 )
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+margin_left = 368.975
+margin_top = 545.152
+margin_right = 414.975
+margin_bottom = 559.152
+text = "Health:"
