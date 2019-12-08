@@ -5,8 +5,8 @@ export (int) var speed = 100
 export (float) var rotation_speed = 3
 var current_speed = speed
 var delta_speed = 10
-var min_speed = 100
-var max_speed = 700
+var min_speed = 50
+var max_speed = 200
 var velocity = Vector2()
 var rotation_dir = 0
 var screen_size
@@ -16,10 +16,9 @@ var last_position
 func _ready():
 	randomize()
 	screen_size = get_viewport_rect().size
-	# position = Vector2(screen_size.x / 2, screen_size.y / 2)
-	# Start with a random direction
-	#rotation_dir = deg2rad(rand_range(0, 360))
-	#rotate(rotation_dir)
+	position = Vector2(screen_size.x / 2, screen_size.y / 2)
+	rotation_dir = deg2rad(rand_range(0, 360))
+	rotate(rotation_dir)
 	
 func _process(delta):
 	# Check if last position is no longer in the same cell as this one
