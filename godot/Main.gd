@@ -6,22 +6,26 @@ const MAPSIZE = Vector2(50, 50)
 
 enum Tile { Dirt, Road, Grass }
 
-onready var tile_map = $Map/TileMap
+
+var trail_scene = preload("res://actors/Trail.tscn")
 
 var map = []
 
-func _ready():
-	randomize()
-	build_level()
+# func _ready():
+	# randomize()
+	# build_level()
 
-func build_level():
-	tile_map.clear()
-	for x in range(LEVEL_SIZE.x):
-		map.append([])
-		for y in range(LEVEL_SIZE.y):
-			map[x].append(Tile.Grass)
-			tile_map.set_cell(x, y, Tile.Grass)
+#func build_level():
+#	tile_map.clear()
+#	for x in range(LEVEL_SIZE.x):
+#		map.append([])
+#		for y in range(LEVEL_SIZE.y):
+#			var type = Tile.Grass
+#			if x == 0 or x == (LEVEL_SIZE.x - 2) or y == 0 or y == (LEVEL_SIZE.y - 2):
+#				type = Tile.Road
+#			map[x].append(type)
+#			tile_map.set_cell(x, y, type)
 
-func set_tile(x, y, type):
-	map[x][y] = type
-	tile_map.set_cell(x, y, type)
+#func set_tile(x, y, type):
+#	map[x][y] = type
+#	tile_map.set_cell(x, y, type)

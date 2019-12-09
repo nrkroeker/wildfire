@@ -40,5 +40,5 @@ rotation = 1.5708
 scale = Vector2( 0.05, 0.05 )
 frames = SubResource( 2 )
 animation = "idle"
-frame = 6
+frame = 8
 playing = true

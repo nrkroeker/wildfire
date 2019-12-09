@@ -11,27 +11,32 @@ var velocity = Vector2()
 var rotation_dir = 0
 var screen_size
 var last_position
+var current_trail
+
+onready var character = get_parent()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	randomize()
 	screen_size = get_viewport_rect().size
-	position = Vector2(screen_size.x / 2, screen_size.y / 2)
+	# position = Vector2(screen_size.x / 2, screen_size.y / 2)
+	velocity = Vector2(speed, 0)
 	rotation_dir = deg2rad(rand_range(0, 360))
 	rotate(rotation_dir)
 	
-func _process(delta):
+#func _process(delta):
 	# Check if last position is no longer in the same cell as this one
-	if last_position:
-		var is_in_last_cell = $"../Map/TileMap"._is_same_cell(position, last_position)
-		print(is_in_last_cell)
-		if !is_in_last_cell:
-			$"../Map/TileMap"._burn_tile(last_position)
-			last_position = position
-	else:
-		last_position = position
+	#if last_position:
+	#	var is_in_last_cell = $"../Map/TileMap"._is_same_cell(position, last_position)
+	#	print(is_in_last_cell)
+	#	if !is_in_last_cell:
+	#		$"../Map/TileMap"._burn_tile(last_position)
+	#		last_position = position
+	#else:
+	#	last_position = position
 
 func _physics_process(delta):
+	character.get_node('Trail')._lengthen(position)
 	_check_inputs(delta)
 	velocity = Vector2(current_speed, 0).rotated(rotation)
 	move_and_slide(velocity)

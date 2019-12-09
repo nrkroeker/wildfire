@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://actors/Flame.tscn" type="PackedScene" id=1]
+[ext_resource path="res://actors/Trail.tscn" type="PackedScene" id=2]
+
+[node name="Character" type="Node2D"]
+
+[node name="Flame" parent="." instance=ExtResource( 1 )]
+z_index = 1
+
+[node name="Trail" parent="." instance=ExtResource( 2 )]

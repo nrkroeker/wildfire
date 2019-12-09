@@ -1,36 +1,16 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
-[ext_resource path="res://map/Map.tscn" type="PackedScene" id=2]
-[ext_resource path="res://actors/Flame.tscn" type="PackedScene" id=3]
+[ext_resource path="res://actors/Character.tscn" type="PackedScene" id=2]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=[
+"Trails",
+]]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ 430.523 ],
+"_edit_vertical_guides_": [ 1024.16 ]
+}
 
-[node name="Map" parent="." instance=ExtResource( 2 )]
-position = Vector2( 1, 0 )
-
-[node name="Flame" parent="." instance=ExtResource( 3 )]
-position = Vector2( 512.405, 300.625 )
-z_index = 1
-speed = 50
-
-[node name="Camera2D" type="Camera2D" parent="Flame"]
-current = true
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
-margin_left = 352.756
-margin_top = 530.485
-margin_right = 392.756
-margin_bottom = 541.485
-rect_scale = Vector2( 9.45001, 3.79424 )
-color = Color( 0, 0, 0, 0.313726 )
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-margin_left = 368.975
-margin_top = 545.152
-margin_right = 414.975
-margin_bottom = 559.152
-text = "Health:"
+[node name="Character" parent="." instance=ExtResource( 2 )]
+position = Vector2( 161.327, 192.009 )

@@ -8,8 +8,8 @@ extends Node2D
 func _ready():
 	pass # Replace with function body.
 
-func get_tile(position):
-	var 	print($"../Map/TileMap".get_cellv(world_to_map(position)))
+func _lengthen(position):
+	$Points.add_point(position)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
