@@ -52,4 +52,4 @@ Actual timeline
 We found that when pulling new or changed files from git, Godot sometimes would not recognize the new files. This made it hard to quickly share work between ourselves, so we opted to pair program when we could.
 
 ### State Transition Diagram
-Please show a simple state transition diagram describing the various states in your game and how the transitions between these states occur.
+![State Transition Diagram](images/state.png)
