@@ -40,6 +40,8 @@ func _ready():
 	velocity = Vector2(speed, 0)
 	rotation_dir = deg2rad(rand_range(0, 360))
 	rotate(rotation_dir)
+	var animation = 'red' if get_parent().name == 'fire' else 'blue'
+	$AnimatedSprite.play(animation)
 
 func set_ui_two():
 	ui_select = 'ui_select_two'

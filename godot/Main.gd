@@ -1,9 +1,8 @@
 extends Node2D
 
-const TILE_SIZE = 25
-const LEVEL_SIZE = Vector2(1000, 1000)
-const MAPSIZE = Vector2(50, 50)
 var screen_size
+var health_item_timer = Timer.new()
+var HEALTH_ITEM_TIME = 2
 
 var character = preload('res://actors/Character/Character.tscn')
 
@@ -19,10 +18,14 @@ func _ready():
 	player_two.position = Vector2(screen_size.x * 0.25, screen_size.y * 0.25)
 	add_child(player_one)
 	add_child(player_two)
+	
+	health_item_timer.one_shot = true
+	health_item_timer.set_wait_time(HEALTH_ITEM_TIME)
 
 func finish_game(loser):
 	var winner = 'fire' if loser == 'water' else 'water'
 	print('winner: ', winner)
+	health_item_timer.stop()
 
 #func build_level():
 #	tile_map.clear()

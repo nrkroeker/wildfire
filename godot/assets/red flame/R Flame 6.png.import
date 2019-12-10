@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/B Flame 12.png-639438e7aa9e0a1f1bdd731028607cc8.stex"
+path="res://.import/R Flame 6.png-f5fc14d7606df5fcbbf21cb398e5415d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/flame/B Flame 12.png"
-dest_files=[ "res://.import/B Flame 12.png-639438e7aa9e0a1f1bdd731028607cc8.stex" ]
+source_file="res://assets/red flame/R Flame 6.png"
+dest_files=[ "res://.import/R Flame 6.png-f5fc14d7606df5fcbbf21cb398e5415d.stex" ]
 
 [params]
 
