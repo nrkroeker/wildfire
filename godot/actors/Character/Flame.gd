@@ -15,6 +15,9 @@ var velocity = Vector2()
 var rotation_dir = 0
 var last_position
 
+var max_health = 10
+var health = max_health
+
 var ui_select = 'ui_select'
 var ui_up = 'ui_up'
 var ui_down = 'ui_down'
@@ -41,6 +44,13 @@ func _ready():
 	velocity = Vector2(speed, 0)
 	rotation_dir = deg2rad(rand_range(0, 360))
 	rotate(rotation_dir)
+
+func take_damage():
+	if state != CHARACTER_STATE.JUMP:
+		health -= 1
+		print(name, ': ', health)
+	if health == 0:
+		get_parent().get_parent().finish_game(name)
 
 	
 func set_ui_two():

@@ -1,7 +1,6 @@
 extends Node2D
 
 var current_trail
-
 var trail_scene = preload("res://actors/Character/Trail.tscn")
 var fire_gradient = preload('res://assets/trails/FireTrail.tres')
 var water_gradient = preload('res://assets/trails/WaterTrail.tres')

@@ -25,6 +25,11 @@ func _ready():
 	# randomize()
 	# build_level()
 
+func finish_game(loser):
+	var winner = 'fire' if loser == 'water' else 'water'
+	
+	print(winner)
+
 #func build_level():
 #	tile_map.clear()
 #	for x in range(LEVEL_SIZE.x):
