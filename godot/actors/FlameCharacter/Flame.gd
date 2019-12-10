@@ -20,6 +20,7 @@ var jump_timer = Timer.new()
 var jump_timeout_timer = Timer.new()
 
 onready var character = get_parent()
+onready var tile_map = character.get_parent().get_node('Map').get_node('TileMap')
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -38,22 +39,51 @@ func _ready():
 	rotate(rotation_dir)
 	
 #func _process(delta):
+	# Get line between last burned tile and current tile
+	# Get all tiles overlapped by that line
+	# Any tiles that do not overlap with flame position
+		# Either use the bounding box as a static distance
+		# Or use bounding edges of visible node to see if any contained tiles are overlapped
+	# - will be burned 
 	# Check if last position is no longer in the same cell as this one
 	#if last_position:
-	#	var is_in_last_cell = $"../Map/TileMap"._is_same_cell(position, last_position)
+	#	var is_in_last_cell = tile_map._is_same_cell(position, last_position)
 	#	print(is_in_last_cell)
 	#	if !is_in_last_cell:
-	#		$"../Map/TileMap"._burn_tile(last_position)
+	#		tile_map._burn_tile(last_position)
 	#		last_position = position
 	#else:
 	#	last_position = position
 
 func _physics_process(delta):
-	if state != CHARACTER_STATE.JUMP:
-		character.current_trail._lengthen(position)
 	_check_inputs(delta)
 	velocity = Vector2(current_speed, 0).rotated(rotation)
 	move_and_slide(velocity)
+	if state != CHARACTER_STATE.JUMP:
+		if last_position:
+			print(position.distance_to(last_position))
+			if position.distance_to(last_position) > 8:
+
+				# var angle = last_position.angle_to(position)
+				#print(angle)
+				# var new_position = Vector2(position.x, position.y)
+				# new_position.x -= cos(angle) * 10
+				# new_position.y -= sin(angle) * 10
+				character.extend_trail(last_position)
+				last_position = position
+		else:
+			last_position = position
+	else:
+		last_position = position
+		# var scale = 20
+		# var tdx = position.x - last_position.x
+		# var tdy = position.y - last_position.y
+		# var norm = sqrt(pow(tdx, 2) + pow(tdy, 2))
+		# var ntdx = tdx / norm
+		# var ntdy = tdy / norm
+		# var dx = ntdx * scale
+		# var dy = ntdy * scale
+	
 
 # Custom methods
 

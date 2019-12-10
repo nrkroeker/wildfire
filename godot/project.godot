@@ -18,3 +18,10 @@ _global_script_class_icons={
 config/name="Wildfire"
 run/main_scene="res://Main.tscn"
 config/icon="res://icon.png"
+
+[layer_names]
+
+2d_physics/layer_1="fire_character"
+2d_physics/layer_2="fire_trail"
+2d_physics/layer_3="water_character"
+2d_physics/layer_4="water_trail"

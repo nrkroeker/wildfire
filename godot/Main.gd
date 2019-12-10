@@ -6,9 +6,6 @@ const MAPSIZE = Vector2(50, 50)
 
 enum Tile { Dirt, Road, Grass }
 
-
-var trail_scene = preload("res://actors/Trail.tscn")
-
 var map = []
 
 # func _ready():

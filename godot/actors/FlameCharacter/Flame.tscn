@@ -1,6 +1,6 @@
 [gd_scene load_steps=16 format=2]
 
-[ext_resource path="res://actors/Flame.gd" type="Script" id=1]
+[ext_resource path="res://actors/FlameCharacter/Flame.gd" type="Script" id=1]
 [ext_resource path="res://assets/flame/B Flame 1.png" type="Texture" id=2]
 [ext_resource path="res://assets/flame/B Flame 2.png" type="Texture" id=3]
 [ext_resource path="res://assets/flame/B Flame 3.png" type="Texture" id=4]
@@ -26,8 +26,10 @@ animations = [ {
 } ]
 
 [node name="Flame" type="KinematicBody2D"]
+collision_mask = 12
 script = ExtResource( 1 )
 __meta__ = {
+"_edit_horizontal_guides_": [  ],
 "_edit_vertical_guides_": [ 25.4691 ]
 }
 
@@ -40,5 +42,8 @@ rotation = 1.5708
 scale = Vector2( 0.05, 0.05 )
 frames = SubResource( 2 )
 animation = "idle"
-frame = 8
+frame = 3
 playing = true
+
+[node name="Camera2D" type="Camera2D" parent="."]
+current = true
