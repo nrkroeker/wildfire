@@ -13,8 +13,13 @@ var min_speed = 50
 var max_speed = 200
 var velocity = Vector2()
 var rotation_dir = 0
-var screen_size
 var last_position
+
+var ui_select = 'ui_select'
+var ui_up = 'ui_up'
+var ui_down = 'ui_down'
+var ui_right = 'ui_right'
+var ui_left = 'ui_left'
 
 var jump_timer = Timer.new()
 var jump_timeout_timer = Timer.new()
@@ -32,12 +37,18 @@ func _ready():
 	add_child(jump_timer)
 	add_child(jump_timeout_timer)
 	randomize()
-	screen_size = get_viewport_rect().size
 	# position = Vector2(screen_size.x / 2, screen_size.y / 2)
 	velocity = Vector2(speed, 0)
 	rotation_dir = deg2rad(rand_range(0, 360))
 	rotate(rotation_dir)
+
 	
+func set_ui_two():
+	ui_select = 'ui_select_two'
+	ui_up = 'ui_up_two'
+	ui_down = 'ui_down_two'
+	ui_right = 'ui_right_two'
+	ui_left = 'ui_left_two'
 #func _process(delta):
 	# Get line between last burned tile and current tile
 	# Get all tiles overlapped by that line
@@ -61,7 +72,7 @@ func _physics_process(delta):
 	move_and_slide(velocity)
 	if state != CHARACTER_STATE.JUMP:
 		if last_position:
-			print(position.distance_to(last_position))
+			# print(position.distance_to(last_position))
 			if position.distance_to(last_position) > 8:
 
 				# var angle = last_position.angle_to(position)
@@ -75,32 +86,26 @@ func _physics_process(delta):
 			last_position = position
 	else:
 		last_position = position
-		# var scale = 20
-		# var tdx = position.x - last_position.x
-		# var tdy = position.y - last_position.y
-		# var norm = sqrt(pow(tdx, 2) + pow(tdy, 2))
-		# var ntdx = tdx / norm
-		# var ntdy = tdy / norm
-		# var dx = ntdx * scale
-		# var dy = ntdy * scale
-	
+
+func on_body_enter(object):
+	print(object.get_name())
 
 # Custom methods
 
 func _check_inputs(delta):
 	rotation_dir = 0
-	if Input.is_action_pressed("ui_accept"):
+	if Input.is_action_pressed(ui_select):
 		if state != CHARACTER_STATE.JUMP and jump_timeout_timer.time_left == 0:
 			state = CHARACTER_STATE.JUMP
 			jump_timer.start()
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed(ui_right):
 		rotation_dir += 1
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed(ui_left):
 		rotation_dir -= 1
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed(ui_up):
 		if (current_speed <= max_speed):
 			current_speed += delta_speed
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed(ui_down):
 		if (current_speed >= min_speed):
 			current_speed -= delta_speed
 	rotation += rotation_dir * rotation_speed * delta

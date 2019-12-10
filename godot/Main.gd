@@ -3,12 +3,25 @@ extends Node2D
 const TILE_SIZE = 25
 const LEVEL_SIZE = Vector2(1000, 1000)
 const MAPSIZE = Vector2(50, 50)
+var screen_size
 
-enum Tile { Dirt, Road, Grass }
+var character = preload('res://actors/Character/Character.tscn')
 
 var map = []
 
-# func _ready():
+func _ready():
+	screen_size = get_viewport_rect().size
+	var player_one = character.instance()
+	player_one.set_name('fire')
+	player_one.position = Vector2(screen_size.x * 0.75, screen_size.y * 0.75)
+	var player_two = character.instance()
+	player_two.set_name('water')
+	player_two.set_gradient_water()
+	player_two.get_node('Flame').set_ui_two()
+	player_two.position = Vector2(screen_size.x * 0.25, screen_size.y * 0.25)
+	add_child(player_one)
+	add_child(player_two)
+
 	# randomize()
 	# build_level()
 
