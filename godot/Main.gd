@@ -7,8 +7,6 @@ var screen_size
 
 var character = preload('res://actors/Character/Character.tscn')
 
-var map = []
-
 func _ready():
 	screen_size = get_viewport_rect().size
 	var player_one = character.instance()
@@ -22,13 +20,9 @@ func _ready():
 	add_child(player_one)
 	add_child(player_two)
 
-	# randomize()
-	# build_level()
-
 func finish_game(loser):
 	var winner = 'fire' if loser == 'water' else 'water'
-	
-	print(winner)
+	print('winner: ', winner)
 
 #func build_level():
 #	tile_map.clear()

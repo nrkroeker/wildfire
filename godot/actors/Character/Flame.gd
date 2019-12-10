@@ -15,9 +15,6 @@ var velocity = Vector2()
 var rotation_dir = 0
 var last_position
 
-var max_health = 10
-var health = max_health
-
 var ui_select = 'ui_select'
 var ui_up = 'ui_up'
 var ui_down = 'ui_down'
@@ -40,41 +37,16 @@ func _ready():
 	add_child(jump_timer)
 	add_child(jump_timeout_timer)
 	randomize()
-	# position = Vector2(screen_size.x / 2, screen_size.y / 2)
 	velocity = Vector2(speed, 0)
 	rotation_dir = deg2rad(rand_range(0, 360))
 	rotate(rotation_dir)
 
-func take_damage():
-	if state != CHARACTER_STATE.JUMP:
-		health -= 1
-		print(name, ': ', health)
-	if health == 0:
-		get_parent().get_parent().finish_game(name)
-
-	
 func set_ui_two():
 	ui_select = 'ui_select_two'
 	ui_up = 'ui_up_two'
 	ui_down = 'ui_down_two'
 	ui_right = 'ui_right_two'
 	ui_left = 'ui_left_two'
-#func _process(delta):
-	# Get line between last burned tile and current tile
-	# Get all tiles overlapped by that line
-	# Any tiles that do not overlap with flame position
-		# Either use the bounding box as a static distance
-		# Or use bounding edges of visible node to see if any contained tiles are overlapped
-	# - will be burned 
-	# Check if last position is no longer in the same cell as this one
-	#if last_position:
-	#	var is_in_last_cell = tile_map._is_same_cell(position, last_position)
-	#	print(is_in_last_cell)
-	#	if !is_in_last_cell:
-	#		tile_map._burn_tile(last_position)
-	#		last_position = position
-	#else:
-	#	last_position = position
 
 func _physics_process(delta):
 	_check_inputs(delta)
@@ -82,25 +54,13 @@ func _physics_process(delta):
 	move_and_slide(velocity)
 	if state != CHARACTER_STATE.JUMP:
 		if last_position:
-			# print(position.distance_to(last_position))
 			if position.distance_to(last_position) > 8:
-
-				# var angle = last_position.angle_to(position)
-				#print(angle)
-				# var new_position = Vector2(position.x, position.y)
-				# new_position.x -= cos(angle) * 10
-				# new_position.y -= sin(angle) * 10
 				character.extend_trail(last_position)
 				last_position = position
 		else:
 			last_position = position
 	else:
 		last_position = position
-
-func on_body_enter(object):
-	print(object.get_name())
-
-# Custom methods
 
 func _check_inputs(delta):
 	rotation_dir = 0
