@@ -3,7 +3,7 @@
 - Nathalie Kroeker
 
 ### How to Play
-Wildfire is a two player game. Each player is always moving and can adjust their speed as well as turn. While moving, a player draws a line where they have been. A player can draw over their own lines, but if a player goes over an enemy line they lose health. To avoid jumping over enemy lines, a player can try to jump. Items will spawn on the playing field and players will race to pick them up. Some items may clear out an enemies drawing, other may give a player more health. The goal is to stay alive longer than the enemy to beat them.
+Wildfire is a two player game. Each player is always moving and can adjust their speed and change their direction. While moving, a player draws a line where they have been. A player can draw over their own lines, but if a player goes over an enemy line they lose health. To avoid going over enemy lines, a player can try to jump. Items will spawn on the playing map and players must race to pick them up. Some items may clear out the enemies drawing, other may give a player more health. The goal is to stay alive longer than the enemy to beat them.
 
 Player 1
 - Movement: WASD
