@@ -1,0 +1,95 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://HUD.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/Righteous/Righteous-Regular.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = 8
+extra_spacing_bottom = 8
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+extra_spacing_top = 8
+extra_spacing_bottom = 9
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 48
+font_data = ExtResource( 2 )
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="P1HealthTitleLabel" type="Label" parent="."]
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 134.0
+margin_bottom = 47.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.0627451, 0.913725, 1, 1 )
+text = "Player 1 Health"
+
+[node name="P1HealthLabel" type="Label" parent="."]
+margin_left = 20.0
+margin_top = 47.0
+margin_right = 134.0
+margin_bottom = 84.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.00784314, 0.882353, 1, 1 )
+text = "10"
+
+[node name="P2HealthTitleLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -174.0
+margin_top = 10.0
+margin_right = -24.0
+margin_bottom = 53.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 1, 0.364706, 0.0509804, 1 )
+text = "Player 2 Health"
+
+[node name="P2HealthLabel" type="Label" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -154.0
+margin_top = 47.0
+margin_right = -25.0
+margin_bottom = 90.0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color = Color( 0.996078, 0.419608, 0.192157, 1 )
+text = "10"
+align = 2
+
+[node name="StartButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -105.5
+margin_top = -43.5
+margin_right = 105.5
+margin_bottom = 43.5
+custom_fonts/font = SubResource( 3 )
+text = "START"
+
+[node name="MessageLabel" type="Label" parent="."]
+margin_left = 230.0
+margin_top = 170.0
+margin_right = 810.0
+margin_bottom = 231.0
+custom_fonts/font = SubResource( 4 )
+text = "WILDFIRE"
+align = 1
+uppercase = true
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]

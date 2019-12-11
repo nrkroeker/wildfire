@@ -4,40 +4,57 @@ var screen_size
 var health_item_timer = Timer.new()
 var HEALTH_ITEM_TIME = 2
 
+export (bool) var game_running = false
+
 var character = preload('res://actors/Character/Character.tscn')
+
+var player_one
+var player_two
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	var player_one = character.instance()
+	player_one = character.instance()
 	player_one.set_name('fire')
-	player_one.position = Vector2(screen_size.x * 0.75, screen_size.y * 0.75)
-	var player_two = character.instance()
+	player_one.set_num(2)
+	player_two = character.instance()
 	player_two.set_name('water')
-	player_two.set_gradient_water()
+	player_two.set_num(1)
 	player_two.get_node('Flame').set_ui_two()
-	player_two.position = Vector2(screen_size.x * 0.25, screen_size.y * 0.25)
-	add_child(player_one)
-	add_child(player_two)
 	
+	# Set up timer for spawning health items
 	health_item_timer.one_shot = true
 	health_item_timer.set_wait_time(HEALTH_ITEM_TIME)
+	
+	# Set health labels to starting health
+	$HUD.update_health(1, player_one.health)
+	$HUD.update_health(2, player_two.health)
+	
+	$GameMusic.play()
+
+func start_new_game():
+	$HUD/MessageLabel.hide()
+	if !player_one.get_parent():
+		add_child(player_one)
+	if !player_two.get_parent():
+		add_child(player_two)
+	player_one.start(get_character_position(1))
+	player_two.start(get_character_position(2))
+	game_running = true
 
 func finish_game(loser):
+	game_running = false
 	var winner = 'fire' if loser == 'water' else 'water'
 	print('winner: ', winner)
 	health_item_timer.stop()
+	
+	$HUD.show_game_over(winner)
+	
+	player_one.stop_moving()
+	player_two.stop_moving()
 
-#func build_level():
-#	tile_map.clear()
-#	for x in range(LEVEL_SIZE.x):
-#		map.append([])
-#		for y in range(LEVEL_SIZE.y):
-#			var type = Tile.Grass
-#			if x == 0 or x == (LEVEL_SIZE.x - 2) or y == 0 or y == (LEVEL_SIZE.y - 2):
-#				type = Tile.Road
-#			map[x].append(type)
-#			tile_map.set_cell(x, y, type)
+func set_health_label(player, health):\
+	$HUD.update_health(player, health)
 
-#func set_tile(x, y, type):
-#	map[x][y] = type
-#	tile_map.set_cell(x, y, type)
+func get_character_position(player):
+	var multiplier = 0.75 if player == 1 else 0.25
+	return Vector2(screen_size.x * multiplier, screen_size.y * multiplier)

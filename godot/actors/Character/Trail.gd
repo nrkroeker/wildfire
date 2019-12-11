@@ -26,3 +26,10 @@ func _lengthen(position):
 	var line = collision_shape.get_polygon()
 	line.append(position)
 	collision_shape.set_polygon(line)
+	
+func clear():
+	print('calling queue_free')
+	queue_free()
+
+func set_gradient(gradient):
+	$Points.set_gradient(gradient)

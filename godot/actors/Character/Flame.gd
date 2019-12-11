@@ -25,10 +25,9 @@ var jump_timer = Timer.new()
 var jump_timeout_timer = Timer.new()
 
 onready var character = get_parent()
-onready var tile_map = character.get_parent().get_node('Map').get_node('TileMap')
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
+	# Set up jump timers
 	jump_timer.connect("timeout", self,"_on_timer_timeout")
 	jump_timer.set_wait_time(jump_time * current_speed)
 	jump_timeout_timer.set_wait_time(jump_time * current_speed)
@@ -36,12 +35,25 @@ func _ready():
 	jump_timeout_timer.one_shot = true
 	add_child(jump_timer)
 	add_child(jump_timeout_timer)
+
+	# Set initial rotation
 	randomize()
-	velocity = Vector2(speed, 0)
 	rotation_dir = deg2rad(rand_range(0, 360))
 	rotate(rotation_dir)
+	
+	# Set animation, a.k.a player color
 	var animation = 'red' if get_parent().name == 'fire' else 'blue'
 	$AnimatedSprite.play(animation)
+
+func start_moving(new_position):
+	position = new_position
+	current_speed = speed
+	velocity = Vector2(current_speed, 0)
+
+func stop_moving():
+	current_speed = 0
+	velocity = Vector2(current_speed, 0)
+	jump_timer.stop()
 
 func set_ui_two():
 	ui_select = 'ui_select_two'
@@ -65,6 +77,7 @@ func _physics_process(delta):
 		last_position = position
 
 func _check_inputs(delta):
+	# Ensure this only happens when game is running - maybe handle in character?
 	rotation_dir = 0
 	if Input.is_action_pressed(ui_select):
 		if state != CHARACTER_STATE.JUMP and jump_timeout_timer.time_left == 0:
