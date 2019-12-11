@@ -83,6 +83,7 @@ func _check_inputs(delta):
 		if state != CHARACTER_STATE.JUMP and jump_timeout_timer.time_left == 0:
 			state = CHARACTER_STATE.JUMP
 			jump_timer.start()
+			get_parent().play_jump_sound()
 	if Input.is_action_pressed(ui_right):
 		rotation_dir += 1
 	if Input.is_action_pressed(ui_left):

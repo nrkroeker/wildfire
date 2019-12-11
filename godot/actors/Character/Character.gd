@@ -70,6 +70,7 @@ func add_trail():
 
 func take_damage():
 	if get_node('Flame').state != CHARACTER_STATE.JUMP:
+		$DamageSound.play()
 		set_health(health - 1)
 	if health == 0:
 		get_parent().finish_game(name)
@@ -86,3 +87,6 @@ func stop_moving():
 
 func extend_trail(position):
 	current_trail._lengthen(position)
+
+func play_jump_sound():
+	$JumpSound.play()

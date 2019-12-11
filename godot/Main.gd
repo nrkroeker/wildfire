@@ -28,10 +28,11 @@ func _ready():
 	# Set health labels to starting health
 	$HUD.update_health(1, player_one.health)
 	$HUD.update_health(2, player_two.health)
-	
-	$GameMusic.play()
+	$MenuMusic.play()
 
 func start_new_game():
+	$MenuMusic.stop()
+	$GameMusic.play()
 	$HUD/MessageLabel.hide()
 	if !player_one.get_parent():
 		add_child(player_one)
@@ -42,6 +43,9 @@ func start_new_game():
 	game_running = true
 
 func finish_game(loser):
+	$GameMusic.stop()
+	$DeathMusic.play()
+	$MenuMusic.play()
 	game_running = false
 	var winner = 'fire' if loser == 'water' else 'water'
 	print('winner: ', winner)

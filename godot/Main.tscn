@@ -1,9 +1,11 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://map/Map.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/audio/Daft_Punk_Around_The_World_6.wav" type="AudioStream" id=3]
-[ext_resource path="res://HUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://HUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/audio/Daft_Punk_Around_The_World_6.wav" type="AudioStream" id=4]
+[ext_resource path="res://assets/audio/DaftPunkDerezzedAviciiRemix_6.wav" type="AudioStream" id=5]
+[ext_resource path="res://assets/audio/Death.wav" type="AudioStream" id=6]
 
 [node name="Main" type="Node2D"]
 script = ExtResource( 1 )
@@ -14,10 +16,16 @@ __meta__ = {
 
 [node name="Map" parent="." instance=ExtResource( 2 )]
 
+[node name="HUD" parent="." instance=ExtResource( 3 )]
+
 [node name="GameMusic" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 3 )
+stream = ExtResource( 4 )
 
 [node name="MenuMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 5 )
 
-[node name="HUD" parent="." instance=ExtResource( 4 )]
+[node name="DeathMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 6 )
 [connection signal="start_game" from="HUD" to="." method="start_new_game"]
+[connection signal="finished" from="GameMusic" to="GameMusic" method="play"]
+[connection signal="finished" from="MenuMusic" to="MenuMusic" method="play"]
