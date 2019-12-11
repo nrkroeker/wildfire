@@ -60,6 +60,8 @@ func set_num(number):
 	gradient = CHARACTER_TEXTURE[number]
 
 func add_trail():
+	if current_trail:
+		current_trail.set_inactive()
 	current_trail = trail_scene.instance()
 	# trails.append(current_trail)
 
