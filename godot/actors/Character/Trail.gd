@@ -12,12 +12,9 @@ func _ready():
 	area.add_child(collision_shape)
 
 func handle_area_entered(object):
-	# print(object.get_parent().get_name())
-	# print(get_parent().get_name())
 	if object.get_parent().get_name() != get_parent().get_name():
 		print(object.get_parent().get_name(), ' collided with ', get_parent().get_name()) 
 		object.get_parent().take_damage()
-	# do collision stuff
 
 func _lengthen(position):
 	# Add point to visible line
