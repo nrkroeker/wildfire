@@ -32,7 +32,7 @@ var CHARACTER_UI_KEYS = {
 	}	
 }
 
-var max_health = 2
+var max_health = 10
 export (int) var health = max_health
 
 var gradient = CHARACTER_TEXTURE[1]
@@ -44,11 +44,8 @@ func _ready():
 
 func start(new_position):
 	if current_trail:
-		current_trail.clear()
+		current_trail.set_inactive()
 		current_trail = null
-	for child in get_children():
-		if child.get_name() == 'Trail':
-			child.clear()
 	$Flame.start_moving(new_position)
 	if !current_trail:
 		add_trail()
@@ -63,7 +60,7 @@ func add_trail():
 	if current_trail:
 		current_trail.set_inactive()
 	current_trail = trail_scene.instance()
-	# trails.append(current_trail)
+	trails.append(current_trail)
 
 	current_trail.set_gradient(gradient)
 	add_child(current_trail)
@@ -77,6 +74,7 @@ func take_damage():
 
 func add_health():
 	set_health(health + 1)
+	$HeartPickupSound.play()
 
 func set_gradient_water():
 	gradient = water_gradient
@@ -87,6 +85,12 @@ func set_health(new_health):
 
 func stop_moving():
 	$Flame.stop_moving()
+
+func clear_trails():
+	for trail in trails:
+		trail.set_inactive()
+	trails = []
+	current_trail = null
 
 func extend_trail(position):
 	current_trail.lengthen(position)

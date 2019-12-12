@@ -56,7 +56,9 @@ func finish_game(loser):
 	
 	$HUD.show_game_over(winner)
 	
+	player_one.clear_trails()
 	player_one.stop_moving()
+	player_two.clear_trails()
 	player_two.stop_moving()
 
 func set_health_label(player, health):\
