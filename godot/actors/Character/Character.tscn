@@ -1,0 +1,21 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://actors/Character/Character.gd" type="Script" id=1]
+[ext_resource path="res://actors/Character/Flame.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/audio/Damage.wav" type="AudioStream" id=3]
+[ext_resource path="res://assets/audio/Jump.wav" type="AudioStream" id=4]
+
+[node name="Character" type="Node2D"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_horizontal_guides_": [ -10.1732 ]
+}
+
+[node name="Flame" parent="." instance=ExtResource( 2 )]
+z_index = 2
+
+[node name="DamageSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 3 )
+
+[node name="JumpSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 4 )

@@ -1,27 +1,64 @@
 extends Node2D
 
-const TILE_SIZE = 25
-const LEVEL_SIZE = Vector2(1000, 1000)
-const MAPSIZE = Vector2(50, 50)
+var screen_size
+var health_item_timer = Timer.new()
+var HEALTH_ITEM_TIME = 2
 
-enum Tile { Dirt, Road, Grass }
+export (bool) var game_running = false
 
-onready var tile_map = $Map/TileMap
+var character = preload('res://actors/Character/Character.tscn')
 
-var map = []
+var player_one
+var player_two
 
 func _ready():
-	randomize()
-	build_level()
+	screen_size = get_viewport_rect().size
+	player_one = character.instance()
+	player_one.set_name('fire')
+	player_one.set_num(2)
+	player_two = character.instance()
+	player_two.set_name('water')
+	player_two.set_num(1)
+	player_two.get_node('Flame').set_ui_two()
+	
+	# Set up timer for spawning health items
+	health_item_timer.one_shot = true
+	health_item_timer.set_wait_time(HEALTH_ITEM_TIME)
+	
+	# Set health labels to starting health
+	$HUD.update_health(1, player_one.health)
+	$HUD.update_health(2, player_two.health)
+	$MenuMusic.play()
 
-func build_level():
-	tile_map.clear()
-	for x in range(LEVEL_SIZE.x):
-		map.append([])
-		for y in range(LEVEL_SIZE.y):
-			map[x].append(Tile.Grass)
-			tile_map.set_cell(x, y, Tile.Grass)
+func start_new_game():
+	$MenuMusic.stop()
+	$GameMusic.play()
+	$HUD/MessageLabel.hide()
+	if !player_one.get_parent():
+		add_child(player_one)
+	if !player_two.get_parent():
+		add_child(player_two)
+	player_one.start(get_character_position(1))
+	player_two.start(get_character_position(2))
+	game_running = true
 
-func set_tile(x, y, type):
-	map[x][y] = type
-	tile_map.set_cell(x, y, type)
+func finish_game(loser):
+	$GameMusic.stop()
+	$DeathMusic.play()
+	$MenuMusic.play()
+	game_running = false
+	var winner = 'fire' if loser == 'water' else 'water'
+	print('winner: ', winner)
+	health_item_timer.stop()
+	
+	$HUD.show_game_over(winner)
+	
+	player_one.stop_moving()
+	player_two.stop_moving()
+
+func set_health_label(player, health):\
+	$HUD.update_health(player, health)
+
+func get_character_position(player):
+	var multiplier = 0.75 if player == 1 else 0.25
+	return Vector2(screen_size.x * multiplier, screen_size.y * multiplier)

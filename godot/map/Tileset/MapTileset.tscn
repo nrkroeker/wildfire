@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/tiles/rpgTile024.png" type="Texture" id=1]
+[ext_resource path="res://assets/tiles/rpgTile061.png" type="Texture" id=2]
+[ext_resource path="res://assets/tiles/rpgTile019.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 12.653, 12.6063 )
+
+[node name="root" type="Node2D"]
+__meta__ = {
+"_edit_horizontal_guides_": [ 24.8148 ],
+"_edit_vertical_guides_": [ 12.1111 ]
+}
+
+[node name="Dirt" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 8, 8 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Dirt"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dirt/StaticBody2D"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Road" type="Sprite" parent="."]
+visible = false
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 8, 8 )
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Road"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Road/StaticBody2D"]
+visible = false
+shape = SubResource( 1 )
+
+[node name="Grass" type="Sprite" parent="."]
+scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 8, 8 )
