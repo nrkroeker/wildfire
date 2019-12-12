@@ -40,7 +40,6 @@ var gradient = CHARACTER_TEXTURE[1]
 func _ready():
 	#add_trail()
 	pass
-	
 
 func start(new_position):
 	if current_trail:
@@ -87,10 +86,11 @@ func stop_moving():
 	$Flame.stop_moving()
 
 func clear_trails():
-	for trail in trails:
-		trail.set_inactive()
-	trails = []
-	current_trail = null
+	#for trail in trails:
+	#	trail.set_inactive()
+	#trails = []
+	#current_trail = null
+	pass
 
 func extend_trail(position):
 	current_trail.lengthen(position)
