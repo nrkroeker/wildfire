@@ -24,11 +24,13 @@ var ui_left = 'ui_left'
 var jump_timer = Timer.new()
 var jump_timeout_timer = Timer.new()
 
+onready var main = get_node('/root/Main')
+
 onready var character = get_parent()
 
 func _ready():
 	# Set up jump timers
-	jump_timer.connect("timeout", self,"_on_timer_timeout")
+	jump_timer.connect("timeout", self,"on_timer_timeout")
 	jump_timer.set_wait_time(jump_time * current_speed)
 	jump_timeout_timer.set_wait_time(jump_time * current_speed)
 	jump_timer.one_shot = true
@@ -63,20 +65,21 @@ func set_ui_two():
 	ui_left = 'ui_left_two'
 
 func _physics_process(delta):
-	_check_inputs(delta)
-	velocity = Vector2(current_speed, 0).rotated(rotation)
-	move_and_slide(velocity)
-	if state != CHARACTER_STATE.JUMP:
-		if last_position:
-			if position.distance_to(last_position) > 8:
-				character.extend_trail(last_position)
+	if main.is_game_running:
+		check_inputs(delta)
+		velocity = Vector2(current_speed, 0).rotated(rotation)
+		move_and_slide(velocity)
+		if state != CHARACTER_STATE.JUMP:
+			if last_position:
+				if position.distance_to(last_position) > 8:
+					character.extend_trail(last_position)
+					last_position = position
+			else:
 				last_position = position
 		else:
 			last_position = position
-	else:
-		last_position = position
 
-func _check_inputs(delta):
+func check_inputs(delta):
 	# Ensure this only happens when game is running - maybe handle in character?
 	rotation_dir = 0
 	if Input.is_action_pressed(ui_select):
@@ -96,7 +99,7 @@ func _check_inputs(delta):
 			current_speed -= delta_speed
 	rotation += rotation_dir * rotation_speed * delta
 	
-func _on_timer_timeout():
+func on_timer_timeout():
 	character.add_trail()
 	state = CHARACTER_STATE.DEFAULT
 	jump_timeout_timer.start()

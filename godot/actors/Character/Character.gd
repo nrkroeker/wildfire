@@ -86,7 +86,7 @@ func stop_moving():
 	$Flame.stop_moving()
 
 func extend_trail(position):
-	current_trail._lengthen(position)
+	current_trail.lengthen(position)
 
 func play_jump_sound():
 	$JumpSound.play()

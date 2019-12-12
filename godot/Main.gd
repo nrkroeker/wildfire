@@ -1,10 +1,12 @@
 extends Node2D
 
+export (NodePath) var main_node = '.'
+
 var screen_size
 var health_item_timer = Timer.new()
 var HEALTH_ITEM_TIME = 2
 
-export (bool) var game_running = false
+var is_game_running = false
 
 var character = preload('res://actors/Character/Character.tscn')
 
@@ -40,13 +42,13 @@ func start_new_game():
 		add_child(player_two)
 	player_one.start(get_character_position(1))
 	player_two.start(get_character_position(2))
-	game_running = true
+	is_game_running = true
 
 func finish_game(loser):
 	$GameMusic.stop()
 	$DeathMusic.play()
 	$MenuMusic.play()
-	game_running = false
+	is_game_running = false
 	var winner = 'fire' if loser == 'water' else 'water'
 	print('winner: ', winner)
 	health_item_timer.stop()

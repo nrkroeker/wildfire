@@ -26,7 +26,7 @@ func handle_area_entered(object):
 		print(object.get_parent().get_name(), ' collided with ', get_parent().get_name()) 
 		object.get_parent().take_damage()
 
-func _lengthen(position):
+func lengthen(position):
 	# Add point to visible line
 	$Points.add_point(position)
 	# Add point to collision line
