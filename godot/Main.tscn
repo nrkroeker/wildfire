@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Main.gd" type="Script" id=1]
 [ext_resource path="res://map/Map.tscn" type="PackedScene" id=2]
@@ -6,8 +6,11 @@
 [ext_resource path="res://assets/audio/Daft_Punk_Around_The_World_6.wav" type="AudioStream" id=4]
 [ext_resource path="res://assets/audio/DaftPunkDerezzedAviciiRemix_6.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/audio/Death.wav" type="AudioStream" id=6]
+[ext_resource path="res://ItemSpawner.gd" type="Script" id=7]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" groups=[
+"pc",
+]]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_horizontal_guides_": [ 430.523 ],
@@ -26,6 +29,10 @@ stream = ExtResource( 5 )
 
 [node name="DeathMusic" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 6 )
+
+[node name="ItemSpawner" type="Timer" parent="."]
+wait_time = 2.0
+script = ExtResource( 7 )
 [connection signal="start_game" from="HUD" to="." method="start_new_game"]
 [connection signal="finished" from="GameMusic" to="GameMusic" method="play"]
 [connection signal="finished" from="MenuMusic" to="MenuMusic" method="play"]

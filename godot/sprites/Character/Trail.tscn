@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://actors/Character/Trail.gd" type="Script" id=1]
+[ext_resource path="res://sprites/Character/Trail.gd" type="Script" id=1]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 1, 0.113725, 0, 1, 0.902344, 0.460406, 0.0704601, 1 )

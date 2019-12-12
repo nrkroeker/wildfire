@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://actors/Character/Character.gd" type="Script" id=1]
-[ext_resource path="res://actors/Character/Flame.tscn" type="PackedScene" id=2]
+[ext_resource path="res://sprites/Character/Character.gd" type="Script" id=1]
+[ext_resource path="res://sprites/Character/Flame.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/audio/Damage.wav" type="AudioStream" id=3]
 [ext_resource path="res://assets/audio/Jump.wav" type="AudioStream" id=4]
 

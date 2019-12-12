@@ -1,14 +1,13 @@
 extends Node2D
 
-export (NodePath) var main_node = '.'
+export (Vector2) onready var screen_size = get_viewport_rect().size
 
-var screen_size
 var health_item_timer = Timer.new()
 var HEALTH_ITEM_TIME = 2
 
 var is_game_running = false
 
-var character = preload('res://actors/Character/Character.tscn')
+var character = preload('res://sprites/Character/Character.tscn')
 
 var player_one
 var player_two
@@ -35,6 +34,7 @@ func _ready():
 func start_new_game():
 	$MenuMusic.stop()
 	$GameMusic.play()
+	$ItemSpawner.start()
 	$HUD/MessageLabel.hide()
 	if !player_one.get_parent():
 		add_child(player_one)
@@ -48,6 +48,7 @@ func finish_game(loser):
 	$GameMusic.stop()
 	$DeathMusic.play()
 	$MenuMusic.play()
+	$ItemSpawner.stop()
 	is_game_running = false
 	var winner = 'fire' if loser == 'water' else 'water'
 	print('winner: ', winner)
@@ -64,3 +65,10 @@ func set_health_label(player, health):\
 func get_character_position(player):
 	var multiplier = 0.75 if player == 1 else 0.25
 	return Vector2(screen_size.x * multiplier, screen_size.y * multiplier)
+
+func get_item_location():
+	# Find random x,y values
+	# Check that they don't collide with any lines or characters or other items
+	# If collision, find new location
+	# Else return location
+	pass

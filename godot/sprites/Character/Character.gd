@@ -6,7 +6,7 @@ var player_num
 
 var current_trail
 var trails = []
-var trail_scene = preload("res://actors/Character/Trail.tscn")
+var trail_scene = preload("res://sprites/Character/Trail.tscn")
 var fire_gradient = preload('res://assets/trails/FireTrail.tres')
 var water_gradient = preload('res://assets/trails/WaterTrail.tres')
 
@@ -74,6 +74,9 @@ func take_damage():
 		set_health(health - 1)
 	if health == 0:
 		get_parent().finish_game(name)
+
+func add_health():
+	set_health(health + 1)
 
 func set_gradient_water():
 	gradient = water_gradient
