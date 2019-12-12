@@ -67,10 +67,3 @@ func set_health_label(player, health):\
 func get_character_position(player):
 	var multiplier = 0.75 if player == 1 else 0.25
 	return Vector2(screen_size.x * multiplier, screen_size.y * multiplier)
-
-func get_item_location():
-	# Find random x,y values
-	# Check that they don't collide with any lines or characters or other items
-	# If collision, find new location
-	# Else return location
-	pass

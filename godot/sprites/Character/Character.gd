@@ -5,7 +5,6 @@ enum CHARACTER_STATE { DEFAULT, JUMP }
 var player_num
 
 var current_trail
-var trails = []
 var trail_scene = preload("res://sprites/Character/Trail.tscn")
 var fire_gradient = preload('res://assets/trails/FireTrail.tres')
 var water_gradient = preload('res://assets/trails/WaterTrail.tres')
@@ -32,24 +31,15 @@ var CHARACTER_UI_KEYS = {
 	}	
 }
 
-var max_health = 10
+var max_health = 2
 export (int) var health = max_health
 
 var gradient = CHARACTER_TEXTURE[1]
 
-func _ready():
-	#add_trail()
-	pass
-
 func start(new_position):
-	if current_trail:
-		current_trail.set_inactive()
-		current_trail = null
 	$Flame.start_moving(new_position)
-	if !current_trail:
-		add_trail()
-	
 	set_health(max_health)
+	clear_trails()
 
 func set_num(number):
 	player_num = number
@@ -59,7 +49,6 @@ func add_trail():
 	if current_trail:
 		current_trail.set_inactive()
 	current_trail = trail_scene.instance()
-	trails.append(current_trail)
 
 	current_trail.set_gradient(gradient)
 	add_child(current_trail)
@@ -86,14 +75,16 @@ func stop_moving():
 	$Flame.stop_moving()
 
 func clear_trails():
-	#for trail in trails:
-	#	trail.set_inactive()
-	#trails = []
-	#current_trail = null
-	pass
+	for child in get_children():
+		if child.get_name() == 'Trail':
+			child.clear()
+	current_trail = null
 
 func extend_trail(position):
-	current_trail.lengthen(position)
+	if !current_trail:
+		add_trail()
+	else:
+		current_trail.lengthen(position)
 
 func play_jump_sound():
 	$JumpSound.play()
